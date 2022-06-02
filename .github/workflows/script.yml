@@ -23,5 +23,12 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a Python script
         run: python .github/workflows/hello.py
+        
+    steps:
+      - uses: actions/checkout@v2
+     - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag akshaykamath69/docker-image-autobuild:latest
+    - name: Push the Docker image
+      run: docker login -u akshaykamath69 -p ${{ secrets.DOCKER_TOKEN }} && docker push akshaykamath69/docker-image-autobuild:latest
 
      
